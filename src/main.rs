@@ -34,8 +34,11 @@ enum Operation {
 }
 
 impl Operation {
-    fn apply(&self, message: &str, shifting: i32, direction: Direction, alphabet: &Alphabet) -> Result<String, String> {
-        Ok(shift(message.to_string(), shifting, direction, alphabet))
+    fn apply(&self, message: &str, shifting:i32, direction:Direction, alphabet: &Alphabet)->Result<String,String>{
+        match self {
+            Operation::Cipher => Ok(shift(message.to_string(), shifting, direction, alphabet)),
+            Operation::Decipher => Ok(shift(message.to_string(), -shifting, direction, alphabet)),
+        }
     }
 }
 
